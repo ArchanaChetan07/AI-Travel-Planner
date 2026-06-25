@@ -295,8 +295,4 @@ Open [http://localhost:5601](http://localhost:5601) → **Stack Management → I
 
 Please ensure all tests pass and coverage does not drop before submitting.
 
----
 
-## 📄 License
-
-This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
