@@ -1,0 +1,15 @@
+# Core LLM & LangChain
+langchain>=0.3.0
+langchain-core>=0.3.0
+langchain-groq>=0.2.0
+langchain-community>=0.3.0
+
+# Environment & Configuration
+python-dotenv>=1.0.0
+
+# Web UI
+streamlit>=1.40.0
+
+# Dev / Test (optional)
+pytest>=8.0.0
+pytest-cov>=5.0.0
