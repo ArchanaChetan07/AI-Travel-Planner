@@ -2,7 +2,7 @@
 
 Agentic day-trip planner — **plan → tools → observe → revise(≤1) → finalize** loop, Streamlit UI, optional Groq LLM, Docker/K8s deployable.
 
-**100% success across 40 DEMO_MODE runs · 60% revision rate · 0.001s avg latency (stub tools) · 54/54 tests · CI: green**
+**100% success across 40 DEMO_MODE runs · 60% revision rate · 0.0017s avg latency (stub tools) · 54/54 tests · CI: green**
 
 `DEMO_MODE=1 docker compose up --build` → open `http://localhost:8501` (no API key required).
 
@@ -56,11 +56,13 @@ Artifact: [`artifacts/batch_metrics.json`](artifacts/batch_metrics.json)
 | Success rate | **100.0%** (40/40 valid itineraries) |
 | Revision rate | **60.0%** (24/40 used the 1 allowed revise) |
 | Errors | **0** |
-| Avg latency / loop | **0.0010 s** |
-| p95 latency | **0.0015 s** |
+| Avg latency / loop | **0.0017 s** |
+| p95 latency | **0.0040 s** |
 | Hardware | Windows · Python 3.11.5 · CPU |
 
-DEMO_MODE is intentionally fast (deterministic stubs). Live Groq latency was **not** measured in this session (no key exercised). The 60% revise rate is expected: rainy cities (Seattle/London/…) and tight budgets deliberately trigger the one-shot correction path.
+DEMO_MODE is intentionally fast (deterministic stubs); latency varies slightly with local load. The 60% revise rate is expected: rainy cities (Seattle/London/…) and tight budgets deliberately trigger the one-shot correction path.
+
+**Live-mode status (2026-07-14): not measured.** One `DEMO_MODE=0` sample using the configured credential reached the real Groq chat-completions endpoint for model `llama-3.3-70b-versatile`, but Groq returned HTTP 401 (`invalid_api_key`). The planner then automatically fell back to a DEMO template, so that run is excluded: there are no valid live success, latency, or error-rate metrics to report. In live mode only Groq is external; weather, attractions, and budget remain local stubs.
 
 Tests this session: **54/54 passed**.
 

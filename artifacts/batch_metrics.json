@@ -7,8 +7,8 @@
   "revision_count": 24,
   "revision_rate_pct": 60.0,
   "error_count": 0,
-  "avg_latency_s": 0.001,
-  "p95_latency_s": 0.0015,
+  "avg_latency_s": 0.0017,
+  "p95_latency_s": 0.004,
   "hardware": {
     "platform": "Windows-10-10.0.26200-SP0",
     "python": "3.11.5"
@@ -42,7 +42,7 @@
       "status": "ok",
       "revised": false,
       "revision_reason": "",
-      "latency_s": 0.0006,
+      "latency_s": 0.0007,
       "tool_calls": 3,
       "itinerary_chars": 600
     },
@@ -57,7 +57,7 @@
       "status": "ok",
       "revised": false,
       "revision_reason": "",
-      "latency_s": 0.0006,
+      "latency_s": 0.0009,
       "tool_calls": 3,
       "itinerary_chars": 586
     },
@@ -73,7 +73,7 @@
       "status": "revised",
       "revised": true,
       "revision_reason": "Weather not outdoor-friendly (steady rain); replace outdoor stops with indoor alternatives.",
-      "latency_s": 0.0013,
+      "latency_s": 0.0029,
       "tool_calls": 6,
       "itinerary_chars": 706
     },
@@ -89,7 +89,7 @@
       "status": "revised",
       "revised": true,
       "revision_reason": "Weather not outdoor-friendly (steady rain); replace outdoor stops with indoor alternatives.",
-      "latency_s": 0.0012,
+      "latency_s": 0.0031,
       "tool_calls": 6,
       "itinerary_chars": 710
     },
@@ -105,7 +105,7 @@
       "status": "revised",
       "revised": true,
       "revision_reason": "Over budget by $3; prefer free/cheap venues and simpler meals.",
-      "latency_s": 0.0011,
+      "latency_s": 0.0017,
       "tool_calls": 6,
       "itinerary_chars": 597
     },
@@ -121,7 +121,7 @@
       "status": "ok",
       "revised": false,
       "revision_reason": "",
-      "latency_s": 0.0006,
+      "latency_s": 0.0009,
       "tool_calls": 3,
       "itinerary_chars": 608
     },
@@ -137,7 +137,7 @@
       "status": "ok",
       "revised": false,
       "revision_reason": "",
-      "latency_s": 0.0007,
+      "latency_s": 0.0009,
       "tool_calls": 3,
       "itinerary_chars": 612
     },
@@ -153,7 +153,7 @@
       "status": "revised",
       "revised": true,
       "revision_reason": "Over budget by $45; prefer free/cheap venues and simpler meals.",
-      "latency_s": 0.001,
+      "latency_s": 0.004,
       "tool_calls": 6,
       "itinerary_chars": 597
     },
@@ -169,7 +169,7 @@
       "status": "ok",
       "revised": false,
       "revision_reason": "",
-      "latency_s": 0.0009,
+      "latency_s": 0.0012,
       "tool_calls": 3,
       "itinerary_chars": 604
     },
@@ -185,7 +185,7 @@
       "status": "revised",
       "revised": true,
       "revision_reason": "Weather not outdoor-friendly (steady rain); replace outdoor stops with indoor alternatives.",
-      "latency_s": 0.0011,
+      "latency_s": 0.0012,
       "tool_calls": 6,
       "itinerary_chars": 706
     },
@@ -201,7 +201,7 @@
       "status": "revised",
       "revised": true,
       "revision_reason": "Weather not outdoor-friendly (steady rain); replace outdoor stops with indoor alternatives. | Over budget by $58; prefer free/cheap venues and simpler meals.",
-      "latency_s": 0.0013,
+      "latency_s": 0.0033,
       "tool_calls": 6,
       "itinerary_chars": 792
     },
@@ -217,7 +217,7 @@
       "status": "revised",
       "revised": true,
       "revision_reason": "Weather not outdoor-friendly (steady rain); replace outdoor stops with indoor alternatives. | Over budget by $15; prefer free/cheap venues and simpler meals.",
-      "latency_s": 0.0011,
+      "latency_s": 0.0021,
       "tool_calls": 6,
       "itinerary_chars": 786
     },
@@ -233,7 +233,7 @@
       "status": "revised",
       "revised": true,
       "revision_reason": "Weather not outdoor-friendly (steady rain); replace outdoor stops with indoor alternatives.",
-      "latency_s": 0.0015,
+      "latency_s": 0.0012,
       "tool_calls": 6,
       "itinerary_chars": 701
     },
@@ -249,7 +249,7 @@
       "status": "revised",
       "revised": true,
       "revision_reason": "Over budget by $149; prefer free/cheap venues and simpler meals.",
-      "latency_s": 0.0014,
+      "latency_s": 0.003,
       "tool_calls": 6,
       "itinerary_chars": 595
     },
@@ -264,7 +264,7 @@
       "status": "revised",
       "revised": true,
       "revision_reason": "Over budget by $73; prefer free/cheap venues and simpler meals.",
-      "latency_s": 0.0012,
+      "latency_s": 0.0016,
       "tool_calls": 6,
       "itinerary_chars": 593
     },
@@ -280,7 +280,7 @@
       "status": "ok",
       "revised": false,
       "revision_reason": "",
-      "latency_s": 0.0005,
+      "latency_s": 0.0007,
       "tool_calls": 3,
       "itinerary_chars": 600
     },
@@ -295,7 +295,7 @@
       "status": "revised",
       "revised": true,
       "revision_reason": "Weather not outdoor-friendly (steady rain); replace outdoor stops with indoor alternatives. | Over budget by $108; prefer free/cheap venues and simpler meals.",
-      "latency_s": 0.0012,
+      "latency_s": 0.0022,
       "tool_calls": 6,
       "itinerary_chars": 779
     },
@@ -310,7 +310,7 @@
       "status": "revised",
       "revised": true,
       "revision_reason": "Weather not outdoor-friendly (steady rain); replace outdoor stops with indoor alternatives.",
-      "latency_s": 0.0013,
+      "latency_s": 0.0011,
       "tool_calls": 6,
       "itinerary_chars": 704
     },
@@ -326,7 +326,7 @@
       "status": "ok",
       "revised": false,
       "revision_reason": "",
-      "latency_s": 0.0006,
+      "latency_s": 0.0007,
       "tool_calls": 3,
       "itinerary_chars": 598
     },
@@ -342,7 +342,7 @@
       "status": "ok",
       "revised": false,
       "revision_reason": "",
-      "latency_s": 0.0006,
+      "latency_s": 0.0007,
       "tool_calls": 3,
       "itinerary_chars": 600
     },
@@ -358,7 +358,7 @@
       "status": "revised",
       "revised": true,
       "revision_reason": "Over budget by $40; prefer free/cheap venues and simpler meals.",
-      "latency_s": 0.0012,
+      "latency_s": 0.0017,
       "tool_calls": 6,
       "itinerary_chars": 597
     },
@@ -374,7 +374,7 @@
       "status": "ok",
       "revised": false,
       "revision_reason": "",
-      "latency_s": 0.0005,
+      "latency_s": 0.0011,
       "tool_calls": 3,
       "itinerary_chars": 598
     },
@@ -390,7 +390,7 @@
       "status": "ok",
       "revised": false,
       "revision_reason": "",
-      "latency_s": 0.0006,
+      "latency_s": 0.001,
       "tool_calls": 3,
       "itinerary_chars": 602
     },
@@ -406,7 +406,7 @@
       "status": "revised",
       "revised": true,
       "revision_reason": "Over budget by $23; prefer free/cheap venues and simpler meals.",
-      "latency_s": 0.0013,
+      "latency_s": 0.0015,
       "tool_calls": 6,
       "itinerary_chars": 606
     },
@@ -422,7 +422,7 @@
       "status": "revised",
       "revised": true,
       "revision_reason": "Over budget by $3; prefer free/cheap venues and simpler meals.",
-      "latency_s": 0.0011,
+      "latency_s": 0.0026,
       "tool_calls": 6,
       "itinerary_chars": 596
     },
@@ -437,7 +437,7 @@
       "status": "revised",
       "revised": true,
       "revision_reason": "Over budget by $5; prefer free/cheap venues and simpler meals.",
-      "latency_s": 0.0011,
+      "latency_s": 0.0019,
       "tool_calls": 6,
       "itinerary_chars": 588
     },
@@ -453,7 +453,7 @@
       "status": "revised",
       "revised": true,
       "revision_reason": "Over budget by $38; prefer free/cheap venues and simpler meals.",
-      "latency_s": 0.0011,
+      "latency_s": 0.0013,
       "tool_calls": 6,
       "itinerary_chars": 603
     },
@@ -469,7 +469,7 @@
       "status": "revised",
       "revised": true,
       "revision_reason": "Over budget by $33; prefer free/cheap venues and simpler meals.",
-      "latency_s": 0.0009,
+      "latency_s": 0.0013,
       "tool_calls": 6,
       "itinerary_chars": 598
     },
@@ -485,7 +485,7 @@
       "status": "ok",
       "revised": false,
       "revision_reason": "",
-      "latency_s": 0.0005,
+      "latency_s": 0.0009,
       "tool_calls": 3,
       "itinerary_chars": 600
     },
@@ -501,7 +501,7 @@
       "status": "ok",
       "revised": false,
       "revision_reason": "",
-      "latency_s": 0.0009,
+      "latency_s": 0.003,
       "tool_calls": 3,
       "itinerary_chars": 603
     },
@@ -533,7 +533,7 @@
       "status": "revised",
       "revised": true,
       "revision_reason": "Over budget by $16; prefer free/cheap venues and simpler meals.",
-      "latency_s": 0.0012,
+      "latency_s": 0.0018,
       "tool_calls": 6,
       "itinerary_chars": 604
     },
@@ -549,7 +549,7 @@
       "status": "revised",
       "revised": true,
       "revision_reason": "Over budget by $71; prefer free/cheap venues and simpler meals.",
-      "latency_s": 0.0013,
+      "latency_s": 0.002,
       "tool_calls": 6,
       "itinerary_chars": 604
     },
@@ -565,7 +565,7 @@
       "status": "revised",
       "revised": true,
       "revision_reason": "Over budget by $83; prefer free/cheap venues and simpler meals.",
-      "latency_s": 0.001,
+      "latency_s": 0.0017,
       "tool_calls": 6,
       "itinerary_chars": 600
     },
@@ -581,7 +581,7 @@
       "status": "revised",
       "revised": true,
       "revision_reason": "Over budget by $45; prefer free/cheap venues and simpler meals.",
-      "latency_s": 0.0013,
+      "latency_s": 0.0046,
       "tool_calls": 6,
       "itinerary_chars": 601
     },
@@ -596,7 +596,7 @@
       "status": "ok",
       "revised": false,
       "revision_reason": "",
-      "latency_s": 0.0007,
+      "latency_s": 0.0008,
       "tool_calls": 3,
       "itinerary_chars": 587
     },
@@ -612,7 +612,7 @@
       "status": "revised",
       "revised": true,
       "revision_reason": "Over budget by $53; prefer free/cheap venues and simpler meals.",
-      "latency_s": 0.001,
+      "latency_s": 0.0014,
       "tool_calls": 6,
       "itinerary_chars": 601
     },
@@ -643,7 +643,7 @@
       "status": "ok",
       "revised": false,
       "revision_reason": "",
-      "latency_s": 0.0005,
+      "latency_s": 0.0007,
       "tool_calls": 3,
       "itinerary_chars": 602
     }
