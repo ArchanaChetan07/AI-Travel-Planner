@@ -1,0 +1,651 @@
+{
+  "mode": "DEMO_MODE",
+  "max_revisions": 1,
+  "n": 40,
+  "success_count": 40,
+  "success_rate_pct": 100.0,
+  "revision_count": 24,
+  "revision_rate_pct": 60.0,
+  "error_count": 0,
+  "avg_latency_s": 0.001,
+  "p95_latency_s": 0.0015,
+  "hardware": {
+    "platform": "Windows-10-10.0.26200-SP0",
+    "python": "3.11.5"
+  },
+  "results": [
+    {
+      "index": 0,
+      "city": "Paris",
+      "interests": [
+        "art",
+        "food"
+      ],
+      "budget_usd": 150,
+      "ok": true,
+      "status": "revised",
+      "revised": true,
+      "revision_reason": "Over budget by $24; prefer free/cheap venues and simpler meals.",
+      "latency_s": 0.0017,
+      "tool_calls": 6,
+      "itinerary_chars": 595
+    },
+    {
+      "index": 1,
+      "city": "Tokyo",
+      "interests": [
+        "food",
+        "culture"
+      ],
+      "budget_usd": 180,
+      "ok": true,
+      "status": "ok",
+      "revised": false,
+      "revision_reason": "",
+      "latency_s": 0.0006,
+      "tool_calls": 3,
+      "itinerary_chars": 600
+    },
+    {
+      "index": 2,
+      "city": "Rome",
+      "interests": [
+        "history"
+      ],
+      "budget_usd": 120,
+      "ok": true,
+      "status": "ok",
+      "revised": false,
+      "revision_reason": "",
+      "latency_s": 0.0006,
+      "tool_calls": 3,
+      "itinerary_chars": 586
+    },
+    {
+      "index": 3,
+      "city": "Seattle",
+      "interests": [
+        "outdoors",
+        "museums"
+      ],
+      "budget_usd": 200,
+      "ok": true,
+      "status": "revised",
+      "revised": true,
+      "revision_reason": "Weather not outdoor-friendly (steady rain); replace outdoor stops with indoor alternatives.",
+      "latency_s": 0.0013,
+      "tool_calls": 6,
+      "itinerary_chars": 706
+    },
+    {
+      "index": 4,
+      "city": "London",
+      "interests": [
+        "museums",
+        "food"
+      ],
+      "budget_usd": 160,
+      "ok": true,
+      "status": "revised",
+      "revised": true,
+      "revision_reason": "Weather not outdoor-friendly (steady rain); replace outdoor stops with indoor alternatives.",
+      "latency_s": 0.0012,
+      "tool_calls": 6,
+      "itinerary_chars": 710
+    },
+    {
+      "index": 5,
+      "city": "Berlin",
+      "interests": [
+        "history",
+        "art"
+      ],
+      "budget_usd": 100,
+      "ok": true,
+      "status": "revised",
+      "revised": true,
+      "revision_reason": "Over budget by $3; prefer free/cheap venues and simpler meals.",
+      "latency_s": 0.0011,
+      "tool_calls": 6,
+      "itinerary_chars": 597
+    },
+    {
+      "index": 6,
+      "city": "Barcelona",
+      "interests": [
+        "outdoors",
+        "food"
+      ],
+      "budget_usd": 140,
+      "ok": true,
+      "status": "ok",
+      "revised": false,
+      "revision_reason": "",
+      "latency_s": 0.0006,
+      "tool_calls": 3,
+      "itinerary_chars": 608
+    },
+    {
+      "index": 7,
+      "city": "New York",
+      "interests": [
+        "museums",
+        "shopping"
+      ],
+      "budget_usd": 220,
+      "ok": true,
+      "status": "ok",
+      "revised": false,
+      "revision_reason": "",
+      "latency_s": 0.0007,
+      "tool_calls": 3,
+      "itinerary_chars": 612
+    },
+    {
+      "index": 8,
+      "city": "Lisbon",
+      "interests": [
+        "food",
+        "history"
+      ],
+      "budget_usd": 90,
+      "ok": true,
+      "status": "revised",
+      "revised": true,
+      "revision_reason": "Over budget by $45; prefer free/cheap venues and simpler meals.",
+      "latency_s": 0.001,
+      "tool_calls": 6,
+      "itinerary_chars": 597
+    },
+    {
+      "index": 9,
+      "city": "Amsterdam",
+      "interests": [
+        "art",
+        "museums"
+      ],
+      "budget_usd": 130,
+      "ok": true,
+      "status": "ok",
+      "revised": false,
+      "revision_reason": "",
+      "latency_s": 0.0009,
+      "tool_calls": 3,
+      "itinerary_chars": 604
+    },
+    {
+      "index": 10,
+      "city": "Vancouver",
+      "interests": [
+        "outdoors",
+        "coffee"
+      ],
+      "budget_usd": 150,
+      "ok": true,
+      "status": "revised",
+      "revised": true,
+      "revision_reason": "Weather not outdoor-friendly (steady rain); replace outdoor stops with indoor alternatives.",
+      "latency_s": 0.0011,
+      "tool_calls": 6,
+      "itinerary_chars": 706
+    },
+    {
+      "index": 11,
+      "city": "Manchester",
+      "interests": [
+        "museums",
+        "food"
+      ],
+      "budget_usd": 80,
+      "ok": true,
+      "status": "revised",
+      "revised": true,
+      "revision_reason": "Weather not outdoor-friendly (steady rain); replace outdoor stops with indoor alternatives. | Over budget by $58; prefer free/cheap venues and simpler meals.",
+      "latency_s": 0.0013,
+      "tool_calls": 6,
+      "itinerary_chars": 792
+    },
+    {
+      "index": 12,
+      "city": "Glasgow",
+      "interests": [
+        "outdoors",
+        "history"
+      ],
+      "budget_usd": 70,
+      "ok": true,
+      "status": "revised",
+      "revised": true,
+      "revision_reason": "Weather not outdoor-friendly (steady rain); replace outdoor stops with indoor alternatives. | Over budget by $15; prefer free/cheap venues and simpler meals.",
+      "latency_s": 0.0011,
+      "tool_calls": 6,
+      "itinerary_chars": 786
+    },
+    {
+      "index": 13,
+      "city": "Bergen",
+      "interests": [
+        "outdoors",
+        "hiking"
+      ],
+      "budget_usd": 100,
+      "ok": true,
+      "status": "revised",
+      "revised": true,
+      "revision_reason": "Weather not outdoor-friendly (steady rain); replace outdoor stops with indoor alternatives.",
+      "latency_s": 0.0015,
+      "tool_calls": 6,
+      "itinerary_chars": 701
+    },
+    {
+      "index": 14,
+      "city": "Paris",
+      "interests": [
+        "art",
+        "food"
+      ],
+      "budget_usd": 25,
+      "ok": true,
+      "status": "revised",
+      "revised": true,
+      "revision_reason": "Over budget by $149; prefer free/cheap venues and simpler meals.",
+      "latency_s": 0.0014,
+      "tool_calls": 6,
+      "itinerary_chars": 595
+    },
+    {
+      "index": 15,
+      "city": "Tokyo",
+      "interests": [
+        "shopping"
+      ],
+      "budget_usd": 40,
+      "ok": true,
+      "status": "revised",
+      "revised": true,
+      "revision_reason": "Over budget by $73; prefer free/cheap venues and simpler meals.",
+      "latency_s": 0.0012,
+      "tool_calls": 6,
+      "itinerary_chars": 593
+    },
+    {
+      "index": 16,
+      "city": "Rome",
+      "interests": [
+        "food",
+        "outdoors"
+      ],
+      "budget_usd": 200,
+      "ok": true,
+      "status": "ok",
+      "revised": false,
+      "revision_reason": "",
+      "latency_s": 0.0005,
+      "tool_calls": 3,
+      "itinerary_chars": 600
+    },
+    {
+      "index": 17,
+      "city": "London",
+      "interests": [
+        "history"
+      ],
+      "budget_usd": 30,
+      "ok": true,
+      "status": "revised",
+      "revised": true,
+      "revision_reason": "Weather not outdoor-friendly (steady rain); replace outdoor stops with indoor alternatives. | Over budget by $108; prefer free/cheap venues and simpler meals.",
+      "latency_s": 0.0012,
+      "tool_calls": 6,
+      "itinerary_chars": 779
+    },
+    {
+      "index": 18,
+      "city": "Seattle",
+      "interests": [
+        "coffee"
+      ],
+      "budget_usd": 120,
+      "ok": true,
+      "status": "revised",
+      "revised": true,
+      "revision_reason": "Weather not outdoor-friendly (steady rain); replace outdoor stops with indoor alternatives.",
+      "latency_s": 0.0013,
+      "tool_calls": 6,
+      "itinerary_chars": 704
+    },
+    {
+      "index": 19,
+      "city": "Prague",
+      "interests": [
+        "history",
+        "art"
+      ],
+      "budget_usd": 110,
+      "ok": true,
+      "status": "ok",
+      "revised": false,
+      "revision_reason": "",
+      "latency_s": 0.0006,
+      "tool_calls": 3,
+      "itinerary_chars": 598
+    },
+    {
+      "index": 20,
+      "city": "Vienna",
+      "interests": [
+        "museums",
+        "food"
+      ],
+      "budget_usd": 160,
+      "ok": true,
+      "status": "ok",
+      "revised": false,
+      "revision_reason": "",
+      "latency_s": 0.0006,
+      "tool_calls": 3,
+      "itinerary_chars": 600
+    },
+    {
+      "index": 21,
+      "city": "Dublin",
+      "interests": [
+        "history",
+        "food"
+      ],
+      "budget_usd": 95,
+      "ok": true,
+      "status": "revised",
+      "revised": true,
+      "revision_reason": "Over budget by $40; prefer free/cheap venues and simpler meals.",
+      "latency_s": 0.0012,
+      "tool_calls": 6,
+      "itinerary_chars": 597
+    },
+    {
+      "index": 22,
+      "city": "Madrid",
+      "interests": [
+        "art",
+        "museums"
+      ],
+      "budget_usd": 125,
+      "ok": true,
+      "status": "ok",
+      "revised": false,
+      "revision_reason": "",
+      "latency_s": 0.0005,
+      "tool_calls": 3,
+      "itinerary_chars": 598
+    },
+    {
+      "index": 23,
+      "city": "Sydney",
+      "interests": [
+        "outdoors",
+        "food"
+      ],
+      "budget_usd": 170,
+      "ok": true,
+      "status": "ok",
+      "revised": false,
+      "revision_reason": "",
+      "latency_s": 0.0006,
+      "tool_calls": 3,
+      "itinerary_chars": 602
+    },
+    {
+      "index": 24,
+      "city": "Singapore",
+      "interests": [
+        "food",
+        "shopping"
+      ],
+      "budget_usd": 150,
+      "ok": true,
+      "status": "revised",
+      "revised": true,
+      "revision_reason": "Over budget by $23; prefer free/cheap venues and simpler meals.",
+      "latency_s": 0.0013,
+      "tool_calls": 6,
+      "itinerary_chars": 606
+    },
+    {
+      "index": 25,
+      "city": "Seoul",
+      "interests": [
+        "culture",
+        "food"
+      ],
+      "budget_usd": 140,
+      "ok": true,
+      "status": "revised",
+      "revised": true,
+      "revision_reason": "Over budget by $3; prefer free/cheap venues and simpler meals.",
+      "latency_s": 0.0011,
+      "tool_calls": 6,
+      "itinerary_chars": 596
+    },
+    {
+      "index": 26,
+      "city": "Cairo",
+      "interests": [
+        "history"
+      ],
+      "budget_usd": 80,
+      "ok": true,
+      "status": "revised",
+      "revised": true,
+      "revision_reason": "Over budget by $5; prefer free/cheap venues and simpler meals.",
+      "latency_s": 0.0011,
+      "tool_calls": 6,
+      "itinerary_chars": 588
+    },
+    {
+      "index": 27,
+      "city": "Montreal",
+      "interests": [
+        "food",
+        "museums"
+      ],
+      "budget_usd": 100,
+      "ok": true,
+      "status": "revised",
+      "revised": true,
+      "revision_reason": "Over budget by $38; prefer free/cheap venues and simpler meals.",
+      "latency_s": 0.0011,
+      "tool_calls": 6,
+      "itinerary_chars": 603
+    },
+    {
+      "index": 28,
+      "city": "Austin",
+      "interests": [
+        "food",
+        "outdoors"
+      ],
+      "budget_usd": 90,
+      "ok": true,
+      "status": "revised",
+      "revised": true,
+      "revision_reason": "Over budget by $33; prefer free/cheap venues and simpler meals.",
+      "latency_s": 0.0009,
+      "tool_calls": 6,
+      "itinerary_chars": 598
+    },
+    {
+      "index": 29,
+      "city": "Chicago",
+      "interests": [
+        "museums",
+        "art"
+      ],
+      "budget_usd": 130,
+      "ok": true,
+      "status": "ok",
+      "revised": false,
+      "revision_reason": "",
+      "latency_s": 0.0005,
+      "tool_calls": 3,
+      "itinerary_chars": 600
+    },
+    {
+      "index": 30,
+      "city": "Oslo",
+      "interests": [
+        "outdoors",
+        "museums"
+      ],
+      "budget_usd": 150,
+      "ok": true,
+      "status": "ok",
+      "revised": false,
+      "revision_reason": "",
+      "latency_s": 0.0009,
+      "tool_calls": 3,
+      "itinerary_chars": 603
+    },
+    {
+      "index": 31,
+      "city": "Edinburgh",
+      "interests": [
+        "history",
+        "outdoors"
+      ],
+      "budget_usd": 85,
+      "ok": true,
+      "status": "ok",
+      "revised": false,
+      "revision_reason": "",
+      "latency_s": 0.0006,
+      "tool_calls": 3,
+      "itinerary_chars": 612
+    },
+    {
+      "index": 32,
+      "city": "Portland",
+      "interests": [
+        "coffee",
+        "outdoors"
+      ],
+      "budget_usd": 75,
+      "ok": true,
+      "status": "revised",
+      "revised": true,
+      "revision_reason": "Over budget by $16; prefer free/cheap venues and simpler meals.",
+      "latency_s": 0.0012,
+      "tool_calls": 6,
+      "itinerary_chars": 604
+    },
+    {
+      "index": 33,
+      "city": "Mexico City",
+      "interests": [
+        "food",
+        "art"
+      ],
+      "budget_usd": 70,
+      "ok": true,
+      "status": "revised",
+      "revised": true,
+      "revision_reason": "Over budget by $71; prefer free/cheap venues and simpler meals.",
+      "latency_s": 0.0013,
+      "tool_calls": 6,
+      "itinerary_chars": 604
+    },
+    {
+      "index": 34,
+      "city": "Bangkok",
+      "interests": [
+        "food",
+        "culture"
+      ],
+      "budget_usd": 60,
+      "ok": true,
+      "status": "revised",
+      "revised": true,
+      "revision_reason": "Over budget by $83; prefer free/cheap venues and simpler meals.",
+      "latency_s": 0.001,
+      "tool_calls": 6,
+      "itinerary_chars": 600
+    },
+    {
+      "index": 35,
+      "city": "Istanbul",
+      "interests": [
+        "history",
+        "food"
+      ],
+      "budget_usd": 90,
+      "ok": true,
+      "status": "revised",
+      "revised": true,
+      "revision_reason": "Over budget by $45; prefer free/cheap venues and simpler meals.",
+      "latency_s": 0.0013,
+      "tool_calls": 6,
+      "itinerary_chars": 601
+    },
+    {
+      "index": 36,
+      "city": "Athens",
+      "interests": [
+        "history"
+      ],
+      "budget_usd": 100,
+      "ok": true,
+      "status": "ok",
+      "revised": false,
+      "revision_reason": "",
+      "latency_s": 0.0007,
+      "tool_calls": 3,
+      "itinerary_chars": 587
+    },
+    {
+      "index": 37,
+      "city": "Budapest",
+      "interests": [
+        "museums",
+        "food"
+      ],
+      "budget_usd": 85,
+      "ok": true,
+      "status": "revised",
+      "revised": true,
+      "revision_reason": "Over budget by $53; prefer free/cheap venues and simpler meals.",
+      "latency_s": 0.001,
+      "tool_calls": 6,
+      "itinerary_chars": 601
+    },
+    {
+      "index": 38,
+      "city": "Paris",
+      "interests": [
+        "museums"
+      ],
+      "budget_usd": 200,
+      "ok": true,
+      "status": "ok",
+      "revised": false,
+      "revision_reason": "",
+      "latency_s": 0.0006,
+      "tool_calls": 3,
+      "itinerary_chars": 587
+    },
+    {
+      "index": 39,
+      "city": "Tokyo",
+      "interests": [
+        "outdoors",
+        "food"
+      ],
+      "budget_usd": 200,
+      "ok": true,
+      "status": "ok",
+      "revised": false,
+      "revision_reason": "",
+      "latency_s": 0.0005,
+      "tool_calls": 3,
+      "itinerary_chars": 602
+    }
+  ]
+}

@@ -1,152 +1,141 @@
-# AI Travel Planning Agent
+[![CI](https://github.com/ArchanaChetan07/AI-Travel-Planner/actions/workflows/ci.yml/badge.svg)](https://github.com/ArchanaChetan07/AI-Travel-Planner/actions/workflows/ci.yml)
 
-### Streamlit day-trip agent with a real plan→tools→observe→revise(≤1)→finalize loop, DEMO_MODE offline path, and Docker/K8s packaging.
+Agentic day-trip planner — **plan → tools → observe → revise(≤1) → finalize** loop, Streamlit UI, optional Groq LLM, Docker/K8s deployable.
 
-[![GitHub](https://img.shields.io/badge/repo-AI-Travel-Planner-181717?logo=github)](https://github.com/ArchanaChetan07/AI-Travel-Planner)
-[![Language](https://img.shields.io/badge/language-Python-3572A5)](https://github.com/ArchanaChetan07/AI-Travel-Planner)
-[![License](https://img.shields.io/badge/license-See%20repository-yellow)](https://github.com/ArchanaChetan07/AI-Travel-Planner)
-[![CI](https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)](https://github.com/ArchanaChetan07/AI-Travel-Planner/actions)
+**100% success across 40 DEMO_MODE runs · 60% revision rate · 0.001s avg latency (stub tools) · 54/54 tests · CI: green**
+
+`DEMO_MODE=1 docker compose up --build` → open `http://localhost:8501` (no API key required).
+
+**Repo:** [github.com/ArchanaChetan07/AI-Travel-Planner](https://github.com/ArchanaChetan07/AI-Travel-Planner)
 
 ---
 
 ## Overview
 
-Many “travel agents” are single LLM prompts without constraint tools, observation, or a hard revision budget.
+This is a real tool-loop agent for day-trip itineraries — not a single prompt chain:
 
-TravelPlanner orchestrates `src/agent/loop.py` with tools `weather_hint`, `attractions_lookup`, `budget_check`; Groq Llama when keyed else DEMO templates; Streamlit UI; Dockerfile + k8s-deployment with HPA; pytest + ruff CI under DEMO_MODE.
-
-End-to-end demoable planner that revises once on weather/budget failures and emits Markdown itineraries with an agent-checks audit trail.
-
-This repository is maintained as **production-minded portfolio work**: clear architecture, automated checks where present, and metrics that are **traceable to committed artifacts** (never invented).
+1. **Plan** a Morning/Afternoon/Evening draft (DEMO templates or Groq Llama)
+2. **Call tools** — `weather_hint`, `attractions_lookup`, `budget_check`
+3. **Observe** weather/budget constraint failures
+4. **Revise once** if outdoor weather or budget checks fail (`MAX_REVISIONS=1`)
+5. **Finalize** Markdown with an agent-checks audit trail
 
 ---
 
-## Architecture
-
-Streamlit app.py → TravelPlanner → agent loop (plan → tools → observe → revise? → finalize) → Markdown itinerary + audit checks
+## Agent loop design
 
 ```mermaid
-flowchart TD
-  UI[Streamlit UI] --> P[TravelPlanner]
-  P --> L[agent/loop.py]
-  L --> C[itinerary_chain DEMO or Groq]
-  L --> T[tools registry]
-  T --> W[weather_hint]
-  T --> A[attractions_lookup]
-  T --> B[budget_check]
-  L --> O[observe constraints]
-  O -->|fail once| R[revise]
-  R --> L
-  O -->|ok| F[finalize Markdown]
+flowchart LR
+  P[Plan day] --> T[Call tools]
+  T --> O[Observe]
+  O -->|ok| F[Finalize]
+  O -->|fail| R[Revise ≤1]
+  R --> T2[Re-check tools]
+  T2 --> F
 ```
 
-```mermaid
-sequenceDiagram
-  participant U as User/Client
-  participant S as Service/Pipeline
-  participant E as Eval/Tools
-  U->>S: request / job
-  S->>E: execute
-  E-->>S: results
-  S-->>U: report / response
-```
-
----
-
-## Results & repository facts
-
-> Only values found in code, configs, tests, or generated reports are listed. Absence of a clinical/ML accuracy number means it was **not** published in-repo.
-
-| Metric | Value | Source |
-|---|---|---|
-| Tracked blobs on main | **27** | `git tree main` |
-| Revision budget | **≤1** | `src/agent/loop.py / README.md` |
-| Tracked files | **27** | `git tree` |
-| Python modules | **20** | `git tree` |
-| Test-related paths | **3** | `git tree` |
-| CI workflows | **Yes** | `.github/workflows` |
-| Docker present | **Yes** | `repo root` |
-
-```mermaid
-%%{init: {'theme':'base'}}%%
-pie showData title Language composition (bytes)
-    "Python" : 97
-    "Dockerfile" : 3
-```
-
----
-
-## Key features
-
-- Explicit agent loop with max one revision
-- Weather, attractions, and budget tools
-- DEMO_MODE offline templates
-- Streamlit input UX for city/interests/budget
-- Kubernetes manifests with probes/HPA/non-root
-- pytest + ruff CI
-
----
-
-## Tech stack
-
-| Layer | Technology |
+| Stage | What happens |
 |---|---|
-| language | Python |
-| ui | Streamlit |
-| llm | Groq Llama (optional) |
-| agent | custom tool loop |
-| deploy | Docker + Kubernetes HPA |
-| ci | GitHub Actions |
+| Plan | `generate_itinerary()` — DEMO templates offline; Groq when `DEMO_MODE=0` + key |
+| Tools | Weather stub, curated attraction catalogue, budget estimator |
+| Observe | `constraint_failures()` — rainy outdoor plan or over-budget estimate |
+| Revise | One rewrite with indoor and/or cheap guidance, then re-run tools |
+| Finalize | Append weather/budget/attractions audit block |
 
 ---
 
-## Skills demonstrated
+## Results (verified this session)
 
-Python · Streamlit · Groq LLM (optional) · Docker · Kubernetes · pytest · CI/CD · testing · automation
+Command: `DEMO_MODE=1 python scripts/run_batch_eval.py --n 40`  
+Artifact: [`artifacts/batch_metrics.json`](artifacts/batch_metrics.json)
 
-Keyword surface: **Python · Python · machine-learning · CI/CD · testing · API · Docker · automation · data-science · software-engineering · system-design · observability · LLM · cloud**
+| Metric | Value |
+|---|---:|
+| Mode | **DEMO_MODE** (no live APIs) |
+| Batch size N | **40** |
+| Success rate | **100.0%** (40/40 valid itineraries) |
+| Revision rate | **60.0%** (24/40 used the 1 allowed revise) |
+| Errors | **0** |
+| Avg latency / loop | **0.0010 s** |
+| p95 latency | **0.0015 s** |
+| Hardware | Windows · Python 3.11.5 · CPU |
 
----
+DEMO_MODE is intentionally fast (deterministic stubs). Live Groq latency was **not** measured in this session (no key exercised). The 60% revise rate is expected: rainy cities (Seattle/London/…) and tight budgets deliberately trigger the one-shot correction path.
 
-## Project structure
-
-```text
-AI-Travel-Planner/
-├── app.py
-├── src/agent/loop.py
-├── src/tools/registry.py
-├── src/chains/itinerary_chain.py
-├── src/core/planner.py
-├── Dockerfile
-├── k8s-deployment.yaml
-└── tests/
-```
+Tests this session: **54/54 passed**.
 
 ---
 
-## Installation & usage
+## DEMO_MODE
+
+| Env | Behavior |
+|---|---|
+| `DEMO_MODE=1` (default in Docker/CI) | Template itineraries + stub tools — **no Groq key** |
+| `DEMO_MODE=0` + `GROQ_API_KEY` | Live Llama itinerary text; tools still offline stubs |
+| Missing key | Auto-falls back to DEMO_MODE |
+
+Toggle in `.env` (see `.env.example`).
+
+---
+
+## How to Run
 
 ```bash
 git clone https://github.com/ArchanaChetan07/AI-Travel-Planner.git
 cd AI-Travel-Planner
-pip install -r requirements.txt
-set DEMO_MODE=1
+pip install -e .
+cp .env.example .env   # DEMO_MODE=1 works with no key
+
 streamlit run app.py
+# or
+DEMO_MODE=1 python scripts/run_batch_eval.py --n 40
+```
+
+Docker:
+
+```bash
+docker compose up --build
+# Streamlit on :8501 (STREAMLIT_PORT=8503 if busy)
 ```
 
 ---
 
-## How it works
+## Tests
 
-User submits destination constraints in Streamlit; the planner builds an initial day plan, calls tools, inspects weather/budget observations, optionally revises once, then finalizes a Markdown itinerary with a checklist of agent verifications.
+```bash
+DEMO_MODE=1 pytest tests/ -v
+```
+
+Covers planner validation, tools, agent revise/finalize, 20 parametrized cities, and batch metric shape.
 
 ---
 
-## Future improvements
+## Tech Stack
 
-- Live weather/maps APIs beyond stubs
-- Multi-day / multi-city planning
-- Commit coverage.xml if advertising coverage % in metadata
+| Layer | Tech |
+|---|---|
+| Agent | `src/agent/loop.py` |
+| Tools | weather / attractions / budget stubs |
+| LLM | Optional Groq Llama 3.3 |
+| UI | Streamlit |
+| Metrics | `src/eval/batch.py` |
+| CI | GitHub Actions (DEMO_MODE, ruff, pytest, Docker build) |
+
+---
+
+## Deployment (K8s)
+
+Manifest: [`k8s-deployment.yaml`](k8s-deployment.yaml) — Namespace, Deployment (`DEMO_MODE=1`), Service, HPA.
+
+```bash
+# Client-side validation (verified this session)
+kubectl apply --dry-run=client -f k8s-deployment.yaml
+
+# Live cluster (after building/pushing image as ai-travel-planner:latest)
+kubectl apply -f k8s-deployment.yaml
+```
+
+Optional secret `travel-planner-secrets` may supply `GROQ_API_KEY`; omit it to stay offline.
 
 ---
 
@@ -154,9 +143,6 @@ User submits destination constraints in Streamlit; the planner builds an initial
 
 See repository.
 
----
+## Author
 
-<p align="center">
-  <b>AI Travel Planning Agent</b><br/>
-  <a href="https://github.com/ArchanaChetan07/AI-Travel-Planner">github.com/ArchanaChetan07/AI-Travel-Planner</a>
-</p>
+**Archana Chetan** · [@ArchanaChetan07](https://github.com/ArchanaChetan07)
