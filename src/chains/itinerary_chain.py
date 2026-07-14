@@ -66,7 +66,7 @@ def _demo_itinerary(
         )
         evening = (
             f"- Affordable local eatery near the centre of {city}\n"
-            f"- Evening stroll under covered walkways if rain continues"
+            f"- Evening indoors at a bookstore café if rain continues"
         )
         note = (
             f"*DEMO_MODE revise:* indoor + budget-friendly plan "
@@ -74,13 +74,16 @@ def _demo_itinerary(
             f"est=${budget.get('estimated_cost_usd', '?')}).*"
         )
     elif force_indoor:
+        safe_interests = ", ".join(
+            i for i in interests if i not in {"outdoors", "hiking", "outdoor"}
+        ) or "culture"
         morning = (
             f"- Start at a flagship indoor museum in {city}\n"
-            f"- Café stop nearby — skip outdoor plazas while it's wet"
+            f"- Café stop nearby — skip open plazas while it's wet"
         )
         afternoon = (
-            f"- {interests_str.title()} indoors: galleries, workshops, or covered markets\n"
-            f"- Optional short transfers between venues (avoid long walks)"
+            f"- {safe_interests.title()} indoors: galleries, workshops, or covered markets\n"
+            f"- Optional short transfers between venues (minimize exposure to rain)"
         )
         evening = (
             f"- Dinner at a renowned indoor restaurant in {city}\n"
