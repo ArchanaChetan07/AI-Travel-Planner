@@ -35,12 +35,11 @@ COPY --chown=appuser:appgroup . .
 # Create logs directory with correct permissions
 RUN mkdir -p logs && chown appuser:appgroup logs
 
-# Switch to non-root user
+# curl is not in slim runtime; healthcheck uses Python stdlib instead
 USER appuser
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=15s --retries=3 \
-    CMD curl -f http://localhost:8501/_stcore/health || exit 1
+HEALTHCHECK --interval=30s --timeout=10s --start-period=20s --retries=3 \
+    CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8501/_stcore/health')"
 
 EXPOSE 8501
 

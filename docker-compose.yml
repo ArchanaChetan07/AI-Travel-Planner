@@ -1,0 +1,14 @@
+services:
+  app:
+    build: .
+    ports:
+      - "${STREAMLIT_PORT:-8501}:8501"
+    environment:
+      DEMO_MODE: "1"
+      STREAMLIT_BROWSER_GATHER_USAGE_STATS: "false"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8501/_stcore/health')"]
+      interval: 20s
+      timeout: 5s
+      retries: 5
+      start_period: 40s

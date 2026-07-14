@@ -42,15 +42,22 @@ spec:
         fsGroup: 1000
       containers:
         - name: streamlit-app
-          image: streamlit-app:latest
+          image: ai-travel-planner:latest
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
               containerPort: 8501
               protocol: TCP
+          env:
+            - name: DEMO_MODE
+              value: "1"
+            - name: STREAMLIT_BROWSER_GATHER_USAGE_STATS
+              value: "false"
+          # Optional live LLM secrets — omit GROQ_API_KEY to stay in DEMO_MODE
           envFrom:
             - secretRef:
                 name: travel-planner-secrets
+                optional: true
           resources:
             requests:
               cpu: "250m"
