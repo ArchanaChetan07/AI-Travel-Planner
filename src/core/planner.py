@@ -1,17 +1,20 @@
 """
 Core domain object: TravelPlanner.
 
-Orchestrates the itinerary-generation workflow, maintains conversation
-state, and wraps all errors in TravelPlannerException for clean
-propagation to the UI layer.
+Validates inputs and runs the tool-loop planning agent
+(plan → tools → observe → revise once → finalize).
 """
 
-from dataclasses import dataclass, field
-from langchain_core.messages import HumanMessage, AIMessage, BaseMessage
+from __future__ import annotations
 
-from src.chains.itinerary_chain import generate_itinerary
-from src.utils.logger import get_logger
+from dataclasses import dataclass, field
+
+from langchain_core.messages import AIMessage, BaseMessage, HumanMessage
+
+from src.agent.loop import AgentResult, run_planning_loop
+from src.config.config import DEFAULT_BUDGET_USD
 from src.utils.custom_exception import TravelPlannerException
+from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
 
@@ -19,21 +22,20 @@ logger = get_logger(__name__)
 @dataclass
 class TravelPlanner:
     """
-    Stateful planner that holds city, interests, and message history
+    Stateful planner that holds city, interests, budget, and message history
     for a single planning session.
     """
 
     city: str = ""
     interests: list[str] = field(default_factory=list)
+    budget_usd: float = DEFAULT_BUDGET_USD
     itinerary: str = ""
+    last_result: AgentResult | None = None
     messages: list[BaseMessage] = field(default_factory=list)
 
     def __post_init__(self) -> None:
         logger.info("TravelPlanner session initialised.")
 
-    # ------------------------------------------------------------------
-    # Setters
-    # ------------------------------------------------------------------
     def set_city(self, city: str) -> None:
         """Set and validate the destination city."""
         if not city or not city.strip():
@@ -41,9 +43,9 @@ class TravelPlanner:
         try:
             self.city = city.strip().title()
             self.messages.append(HumanMessage(content=f"Destination: {self.city}"))
-            logger.info(f"City set to '{self.city}'.")
+            logger.info("City set to '%s'.", self.city)
         except Exception as exc:
-            logger.error(f"Failed to set city: {exc}")
+            logger.error("Failed to set city: %s", exc)
             raise TravelPlannerException("Failed to set destination city.", exc) from exc
 
     def set_interests(self, interests_input: str) -> None:
@@ -59,17 +61,26 @@ class TravelPlanner:
             self.messages.append(
                 HumanMessage(content=f"Interests: {', '.join(self.interests)}")
             )
-            logger.info(f"Interests set: {self.interests}")
+            logger.info("Interests set: %s", self.interests)
         except Exception as exc:
-            logger.error(f"Failed to set interests: {exc}")
+            logger.error("Failed to set interests: %s", exc)
             raise TravelPlannerException("Failed to set interests.", exc) from exc
 
-    # ------------------------------------------------------------------
-    # Main action
-    # ------------------------------------------------------------------
+    def set_budget(self, budget_usd: float | int | str) -> None:
+        """Set day-trip budget in USD."""
+        try:
+            value = float(budget_usd)
+        except (TypeError, ValueError) as exc:
+            raise ValueError("Budget must be a number.") from exc
+        if value <= 0:
+            raise ValueError("Budget must be positive.")
+        self.budget_usd = value
+        self.messages.append(HumanMessage(content=f"Budget: ${self.budget_usd:.0f}"))
+        logger.info("Budget set to $%s.", self.budget_usd)
+
     def create_itinerary(self) -> str:
         """
-        Generate and store the day-trip itinerary.
+        Run the planning agent loop and store the finalized itinerary.
 
         Returns:
             Markdown-formatted itinerary string.
@@ -80,32 +91,40 @@ class TravelPlanner:
         if not self.city:
             raise TravelPlannerException("City must be set before creating an itinerary.")
         if not self.interests:
-            raise TravelPlannerException("Interests must be set before creating an itinerary.")
+            raise TravelPlannerException(
+                "Interests must be set before creating an itinerary."
+            )
 
         try:
             logger.info(
-                f"Generating itinerary for city='{self.city}', "
-                f"interests={self.interests}."
+                "Running agent loop for city=%r interests=%s budget=%s",
+                self.city,
+                self.interests,
+                self.budget_usd,
             )
-            result = generate_itinerary(self.city, self.interests)
-            self.itinerary = result
-            self.messages.append(AIMessage(content=result))
-            logger.info("Itinerary generated and stored successfully.")
-            return result
+            result = run_planning_loop(
+                self.city,
+                self.interests,
+                budget_usd=self.budget_usd,
+            )
+            self.last_result = result
+            self.itinerary = result.itinerary
+            self.messages.append(AIMessage(content=self.itinerary))
+            logger.info("Itinerary finalized status=%s", result.status)
+            return self.itinerary
         except Exception as exc:
-            logger.error(f"Itinerary generation failed: {exc}")
+            logger.error("Itinerary generation failed: %s", exc)
             raise TravelPlannerException(
                 f"Failed to generate itinerary for '{self.city}'.", exc
             ) from exc
 
-    # ------------------------------------------------------------------
-    # Utility
-    # ------------------------------------------------------------------
     def reset(self) -> None:
         """Clear session state for reuse."""
         self.city = ""
         self.interests = []
+        self.budget_usd = DEFAULT_BUDGET_USD
         self.itinerary = ""
+        self.last_result = None
         self.messages = []
         logger.info("TravelPlanner session reset.")
 
@@ -113,5 +132,6 @@ class TravelPlanner:
         return (
             f"TravelPlanner(city={self.city!r}, "
             f"interests={self.interests!r}, "
+            f"budget_usd={self.budget_usd!r}, "
             f"has_itinerary={bool(self.itinerary)})"
         )

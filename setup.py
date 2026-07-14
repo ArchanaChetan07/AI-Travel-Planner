@@ -12,12 +12,12 @@ with open("README.md", encoding="utf-8") as f:
 
 setup(
     name="ai-travel-planner",
-    version="1.0.0",
+    version="2.0.0",
     author="Sudhanshu",
-    description="AI-powered day-trip itinerary generator using LangChain + Groq",
+    description="Tool-loop travel planning agent (weather, attractions, budget) with optional Groq",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/data-guru0/AI-TRAVEL-ITINEARY-PLANNER",
+    url="https://github.com/ArchanaChetan07/AI-Travel-Planner",
     packages=find_packages(exclude=["tests*", "*.pycache__*"]),
     python_requires=">=3.10",
     install_requires=requirements,

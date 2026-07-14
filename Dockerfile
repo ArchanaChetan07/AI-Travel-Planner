@@ -17,8 +17,8 @@ RUN pip install --no-cache-dir --upgrade pip \
 FROM python:3.12-slim AS runtime
 
 LABEL maintainer="Sudhanshu"
-LABEL description="AI Travel Itinerary Planner — Streamlit + LangChain + Groq"
-LABEL version="1.0.0"
+LABEL description="AI Travel Planning Agent — tool loop + Streamlit"
+LABEL version="2.0.0"
 
 # Security: run as non-root user
 RUN addgroup --system appgroup && adduser --system --ingroup appgroup appuser
@@ -46,6 +46,7 @@ EXPOSE 8501
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
+    DEMO_MODE=1 \
     STREAMLIT_BROWSER_GATHER_USAGE_STATS=false \
     STREAMLIT_THEME_BASE=dark
 

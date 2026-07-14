@@ -1,19 +1,20 @@
-name: CI / CD Pipeline
+name: CI
 
 on:
   push:
-    branches: [main, develop]
+    branches: [main, master, develop]
   pull_request:
-    branches: [main]
+    branches: [main, master]
 
 jobs:
-  # ── Lint & Test ────────────────────────────────────────────────────────────
   test:
     name: Lint & Unit Tests
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: ["3.10", "3.12"]
+    env:
+      DEMO_MODE: "1"
 
     steps:
       - uses: actions/checkout@v4
@@ -27,30 +28,30 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install -e ".[dev]"
+          pip install -e .
           pip install pytest pytest-cov ruff
 
       - name: Lint with ruff
         run: ruff check src/ tests/
 
       - name: Run tests with coverage
-        env:
-          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: |
           pytest tests/ -v --cov=src --cov-report=xml --cov-report=term-missing
 
       - name: Upload coverage report
         uses: codecov/codecov-action@v4
+        continue-on-error: true
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage.xml
 
-  # ── Docker Build ──────────────────────────────────────────────────────────
   docker:
     name: Build Docker Image
     runs-on: ubuntu-latest
     needs: test
     if: github.ref == 'refs/heads/main'
+    env:
+      DEMO_MODE: "1"
 
     steps:
       - uses: actions/checkout@v4
@@ -58,19 +59,11 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Build and push
+      - name: Build image (no push required)
         uses: docker/build-push-action@v5
         with:
           context: .
-          push: true
-          tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/ai-travel-planner:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/ai-travel-planner:${{ github.sha }}
+          push: false
+          tags: ai-travel-planner:ci
           cache-from: type=gha
           cache-to: type=gha,mode=max
